@@ -9,14 +9,13 @@ class Physics extends Component {
     super(); // Call the parent constructor.
     this.velocity = velocity; // Initialize the velocity.
     this.acceleration = acceleration; // Initialize the acceleration.
-    this.gravity = gravity; // Initialize the gravity.
   }
 
   // The update method handles how the component's state changes over time.
   update(deltaTime) {
     // Update velocity based on acceleration and gravity.
     this.velocity.x += this.acceleration.x * deltaTime;
-    this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
+    this.velocity.y += this.acceleration.y * deltaTime;
     // Move the game object based on the velocity.
     this.gameObject.x += this.velocity.x * deltaTime;
     this.gameObject.y += this.velocity.y * deltaTime;

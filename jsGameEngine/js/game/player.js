@@ -43,20 +43,20 @@ class Player extends GameObject {
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
       physics.velocity.x = 100;
       this.direction = -1;
-    } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
+    } 
+    else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
       physics.velocity.x = -100;
       this.direction = 1;
-    } else if (!this.isGamepadMovement) {
+    } 
+    else if (!this.isGamepadMovement && input.isKeyDown('ArrowUp')) {
+      physics.velocity.y = -100;
+    } 
+    else if (!this.isGamepadMovement && input.isKeyDown('ArrowDown')) {
+      physics.velocity.y = 100;  
+    } 
+    else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
-    }
-
-    // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
-      this.startJump();
-    }
-
-    if (this.isJumping) {
-      this.updateJump(deltaTime);
+      physics.velocity.y = 0;
     }
 
     // Handle collisions with collectibles
