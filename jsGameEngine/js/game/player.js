@@ -109,6 +109,8 @@ class Player extends GameObject {
       location.reload();
     }
 
+    this.boundaries();
+
     super.update(deltaTime);
   }
 
@@ -215,6 +217,22 @@ class Player extends GameObject {
     this.lives = 3;
     this.score = 0;
     this.resetPlayerState();
+  }
+
+  //thanks to Bob for speeding up the process (I named co-pilot Bob)
+  boundaries() {
+    if (this.x < 0) {
+      this.x = 0;
+    }
+    else if (this.x > this.game.canvas.width - this.renderer.width) {
+      this.x = this.game.canvas.width - this.renderer.width;
+    }
+    else if (this.y < 0) {
+      this.y = 0;
+    }
+    else if (this.y > this.game.canvas.height - this.renderer.height) {
+      this.y = this.game.canvas.height - this.renderer.height;
+    }
   }
 }
 
