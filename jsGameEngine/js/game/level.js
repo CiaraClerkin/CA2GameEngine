@@ -22,7 +22,7 @@ class Level extends Game {
     this.addGameObject(new PlayerUI(10, 10));
 
     // Set the game's camera target to the player
-    this.camera.target = player;
+    //this.camera.target = player;
 
     // Define the platform's width and the gap between platforms
     const platformWidth = 200;

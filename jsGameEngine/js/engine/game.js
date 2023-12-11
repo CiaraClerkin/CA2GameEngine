@@ -1,5 +1,5 @@
 // This class depends on the Camera, which is a separate module and needs to be imported.
-import Camera from './camera.js';
+//import Camera from './camera.js';
 
 // The Game class is responsible for setting up and managing the main game loop.
 class Game {
@@ -22,7 +22,7 @@ class Game {
     // Add an event listener to resize the canvas whenever the window size changes.
     window.addEventListener('resize', () => this.resizeCanvas());
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
-    this.camera = new Camera(null, this.canvas.width, this.canvas.height);
+    //this.camera = new Camera(null, this.canvas.width, this.canvas.height);
   }
 
   // This method resizes the canvas to fill the window, with a small margin.
@@ -46,7 +46,7 @@ class Game {
 
     // Update all game objects and the camera.
     this.update();
-    this.camera.update();
+    //this.camera.update();
     // Draw the game objects on the canvas.
     this.draw();
 
@@ -74,7 +74,7 @@ class Game {
     // Save the current state of the canvas and the context.
     this.ctx.save();
     // Translate the canvas by the negative of the camera's position. This makes the camera follow its target.
-    this.ctx.translate(-this.camera.x, -this.camera.y);
+    //this.ctx.translate(-this.camera.x, -this.camera.y);
 
     // Draw each game object on the canvas.
     for (const gameObject of this.gameObjects) {

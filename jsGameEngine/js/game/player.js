@@ -48,14 +48,17 @@ class Player extends GameObject {
       physics.velocity.x = -100;
       this.direction = 1;
     } 
-    else if (!this.isGamepadMovement && input.isKeyDown('ArrowUp')) {
+    else if (!this.isGamepadMovement) {
+      physics.velocity.x = 0;
+    }
+    
+    if (!this.isGamepadMovement && input.isKeyDown('ArrowUp')) {
       physics.velocity.y = -100;
     } 
     else if (!this.isGamepadMovement && input.isKeyDown('ArrowDown')) {
       physics.velocity.y = 100;  
     } 
     else if (!this.isGamepadMovement) {
-      physics.velocity.x = 0;
       physics.velocity.y = 0;
     }
 
@@ -131,9 +134,17 @@ class Player extends GameObject {
         physics.velocity.x = -100;
         this.direction = 1;
       } 
+      //worry about this later
+      else if (verticalAxis < 0.1 && verticalAxis > -0.1) {
+        physics.velocity.y = 100;
+      }
+      else if (verticalAxis > 0.1) {
+        physics.velocity.y = -100;
+      }
       // Stop
       else {
         physics.velocity.x = 0;
+        physics.velocity.y = 0;
       }
       
       // Handle jump, using gamepad button 0 (typically the 'A' button on most gamepads)

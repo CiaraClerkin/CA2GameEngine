@@ -20,7 +20,7 @@ class UI extends Component {
   // The draw method of the UI class.
   draw(ctx) {
     // Get the camera from the game associated with the current object.
-    const camera = this.gameObject.game.camera;
+    //const camera = this.gameObject.game.camera;
 
     // Set the font, fill style, text align, and text baseline of the context.
     ctx.font = this.font;
@@ -29,7 +29,8 @@ class UI extends Component {
     ctx.textBaseline = this.textBaseline;
 
     // Fill in the text at the given position plus the camera position.
-    ctx.fillText(this.text, this.x + camera.x, this.y + camera.y);
+    //+camer.x +camera.y
+    ctx.fillText(this.text, this.x, this.y);
   }
 
   // A method to set the text of the UI component.
