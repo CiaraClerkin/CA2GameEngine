@@ -41,11 +41,11 @@ class Player extends GameObject {
     
     // Handle player movement
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = 100;
+      physics.velocity.x = 200;
       this.direction = -1;
     } 
     else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -100;
+      physics.velocity.x = -200;
       this.direction = 1;
     } 
     else if (!this.isGamepadMovement) {
@@ -53,10 +53,10 @@ class Player extends GameObject {
     }
     
     if (!this.isGamepadMovement && input.isKeyDown('ArrowUp')) {
-      physics.velocity.y = -100;
+      physics.velocity.y = -200;
     } 
     else if (!this.isGamepadMovement && input.isKeyDown('ArrowDown')) {
-      physics.velocity.y = 100;  
+      physics.velocity.y = 200;  
     } 
     else if (!this.isGamepadMovement) {
       physics.velocity.y = 0;
@@ -133,7 +133,7 @@ class Player extends GameObject {
       // Move left
       else if (horizontalAxis < -0.1) {
         this.isGamepadMovement = true;
-        physics.velocity.x = -100;
+        physics.velocity.x = 100;
         this.direction = 1;
       } 
       //worry about this later
