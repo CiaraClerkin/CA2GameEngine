@@ -12,7 +12,7 @@ import {Images} from '../engine/resources.js';
 
 // Import the Player and Platform classes from the current directory
 import Player from './player.js';
-//import Platform from './platform.js';
+import Platform from './platform.js';
 
 // Define a new class, Enemy, which extends (i.e., inherits from) GameObject
 class Enemy extends GameObject {
@@ -28,7 +28,7 @@ class Enemy extends GameObject {
     
     // Add a Physics component to this enemy, responsible for managing its physical interactions
     // Sets the initial velocity and acceleration
-    //this.addComponent(new Physics({ x: 50, y: 0 }, { x: 0, y: 0 }));
+    this.addComponent(new Physics({ x: 50, y: 0 }, { x: 0, y: 0 }));
     
     // Initialize variables related to enemy's movement
     this.movementDistance = 0;

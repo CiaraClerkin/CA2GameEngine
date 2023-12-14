@@ -41,25 +41,22 @@ class Player extends GameObject {
     
     // Handle player movement
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = 200;
+      physics.velocity.x = 100;
       this.direction = -1;
-    } 
-    else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -200;
+    } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
+      physics.velocity.x = -100;
       this.direction = 1;
-    } 
-    else if (!this.isGamepadMovement) {
+    } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
     }
-    
-    if (!this.isGamepadMovement && input.isKeyDown('ArrowUp')) {
-      physics.velocity.y = -200;
-    } 
-    else if (!this.isGamepadMovement && input.isKeyDown('ArrowDown')) {
-      physics.velocity.y = 200;  
-    } 
-    else if (!this.isGamepadMovement) {
-      physics.velocity.y = 0;
+
+    // Handle player jumping
+    if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
+      this.startJump();
+    }
+
+    if (this.isJumping) {
+      this.updateJump(deltaTime);
     }
 
     // Handle collisions with collectibles
@@ -109,8 +106,6 @@ class Player extends GameObject {
       location.reload();
     }
 
-    this.boundaries();
-
     super.update(deltaTime);
   }
 
@@ -133,20 +128,12 @@ class Player extends GameObject {
       // Move left
       else if (horizontalAxis < -0.1) {
         this.isGamepadMovement = true;
-        physics.velocity.x = 100;
+        physics.velocity.x = -100;
         this.direction = 1;
       } 
-      //worry about this later
-      else if (verticalAxis < 0.1 && verticalAxis > -0.1) {
-        physics.velocity.y = 100;
-      }
-      else if (verticalAxis > 0.1) {
-        physics.velocity.y = -100;
-      }
       // Stop
       else {
         physics.velocity.x = 0;
-        physics.velocity.y = 0;
       }
       
       // Handle jump, using gamepad button 0 (typically the 'A' button on most gamepads)
@@ -217,22 +204,6 @@ class Player extends GameObject {
     this.lives = 3;
     this.score = 0;
     this.resetPlayerState();
-  }
-
-  //thanks to Bob for speeding up the process (I named co-pilot Bob)
-  boundaries() {
-    if (this.x < 0) {
-      this.x = 0;
-    }
-    else if (this.x > this.game.canvas.width - this.renderer.width) {
-      this.x = this.game.canvas.width - this.renderer.width;
-    }
-    else if (this.y < 0) {
-      this.y = 0;
-    }
-    else if (this.y > this.game.canvas.height - this.renderer.height) {
-      this.y = this.game.canvas.height - this.renderer.height;
-    }
   }
 }
 

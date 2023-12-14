@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #150c29; /* Dark purple background color */
+    background-color: #ff0000; /* Red background color */
 }
 
 /* Add border to the canvas element */
