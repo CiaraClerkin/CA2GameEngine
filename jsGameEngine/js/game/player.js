@@ -39,6 +39,8 @@ class Player extends GameObject {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
 
+    // Climbing the ladder
+    // Sees if player makes contact with ladder, then player can move up or down
     const ladders = this.game.gameObjects.filter((obj) => obj instanceof Ladder);
     for (const ladder of ladders) {
       if (physics.isColliding(ladder.getComponent(Physics))) {
@@ -49,8 +51,15 @@ class Player extends GameObject {
         } else if (input.isKeyDown('ArrowDown')) {
           physics.velocity.y = this.speed;
         } else {
+          //so the player doesn't fall
           physics.velocity.y = 0;
+          physics.gravity.y = 0;
         }
+      }
+      else {
+        //gravity is returned when player is no longer touching ladder
+        //which avoids having the player ascend to the heavens
+        physics.gravity.y = 400;
       }
     }
 
@@ -108,7 +117,7 @@ class Player extends GameObject {
     }
   
     // Check if player has fallen off the bottom of the screen
-    if (this.y > this.game.canvas.height) {
+    if (this.y > this.game.canvas.height + 300) {
       this.resetPlayerState();
     }
 
@@ -206,7 +215,7 @@ class Player extends GameObject {
 
   resetPlayerState() {
     // Reset the player's state, repositioning it and nullifying movement
-    this.x = this.game.canvas.width / 2;
+    this.x = 0;
     this.y = this.game.canvas.height / 2;
     this.getComponent(Physics).velocity = { x: 0, y: 0 };
     this.getComponent(Physics).acceleration = { x: 0, y: 0 };

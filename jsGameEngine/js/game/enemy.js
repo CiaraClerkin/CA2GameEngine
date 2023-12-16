@@ -32,7 +32,7 @@ class Enemy extends GameObject {
     
     // Initialize variables related to enemy's movement
     this.movementDistance = 0;
-    this.movementLimit = 100;
+    this.movementLimit = 330;
     this.movingRight = true;
   }
 
@@ -41,6 +41,8 @@ class Enemy extends GameObject {
   update(deltaTime) {
     // Get the Physics component of this enemy
     const physics = this.getComponent(Physics);
+
+    //physics.velocity.x = 50;
 
     // Check if the enemy is moving to the right
     if (this.movingRight) {
