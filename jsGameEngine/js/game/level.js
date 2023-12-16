@@ -5,6 +5,7 @@ import Enemy from './enemy.js';
 import PlayerUI from './playerUI.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
+import Ladder from './ladder.js';
 
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
@@ -42,14 +43,17 @@ class Level extends Game {
 
     // Create enemies and add them to the game
     // Temporarily and maybe completely disabling enemies
-    /*this.addGameObject(new Enemy(50, this.canvas.height - 90));
+    this.addGameObject(new Enemy(50, this.canvas.height - 90));
     this.addGameObject(new Enemy(platformWidth + gap + 50, this.canvas.height - 90));
-    this.addGameObject(new Enemy(2 * (platformWidth + gap) + 50, this.canvas.height - 90));*/
+    this.addGameObject(new Enemy(2 * (platformWidth + gap) + 50, this.canvas.height - 90));
 
     // Create collectibles and add them to the game
     this.addGameObject(new Collectible(250, this.canvas.height - 100, 20, 20));
     this.addGameObject(new Collectible(450, this.canvas.height - 100, 20, 20));
     this.addGameObject(new Collectible(650, this.canvas.height - 100, 20, 20));
+
+    // Create a ladder and add it to the game
+    this.addGameObject(new Ladder(0, 0, this.canvas.height));
   }
   
 }

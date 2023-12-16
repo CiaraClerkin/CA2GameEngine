@@ -8,7 +8,7 @@ class Platform extends GameObject {
   
   // Define the constructor for the Platform class. It takes arguments for the x and y coordinates,
   // width, height, and color (with a default value of 'gray' if no color is provided)
-  constructor(x, y, width, height, color = 'gray') {
+  constructor(x, y, width, height, movingType, color = 'gray') {
     
     // Call the constructor of the superclass (GameObject) with the x and y coordinates
     super(x, y);
@@ -22,8 +22,44 @@ class Platform extends GameObject {
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }));
     
     // Set the tag property to 'platform'. This can be used to identify platforms later in the game logic
-    this.tag = 'platform'; 
+    this.tag = 'platform';
+    
+    //this.movementDistance = 0;
+    //this.movementLimit = 200;
+    //this.movingOG = true;
   }
+
+  /*update(deltaTime) {
+    const physics = this.getComponent(Physics);
+
+    //if (this.movingType == 'vertical') {
+      if (this.movingOG) {
+        // If it hasn't reached its movement limit, make it move right
+        if (this.movementDistance < this.movementLimit) {
+          physics.velocity.x = 50;
+          this.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
+        } else {
+          // If it reached the limit, make it move left
+          this.movingOG = false;
+          this.movementDistance = 0;
+        }
+      } else {
+        // If it hasn't reached its movement limit, make it move left
+        if (this.movementDistance < this.movementLimit) {
+          physics.velocity.x = -50;
+          this.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
+        } else {
+          // If it reached the limit, make it move right
+          this.movingOG = true;
+          this.movementDistance = 0;
+        }
+      }
+    }
+    //else if (this.movingType == 'circular') {
+
+    //}
+  }*/
+
 }
 
 // Export the Platform class as the default export of this module

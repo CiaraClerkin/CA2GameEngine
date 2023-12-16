@@ -8,6 +8,7 @@ import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
+import Ladder from './ladder.js';
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -38,6 +39,21 @@ class Player extends GameObject {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
 
+    const ladders = this.game.gameObjects.filter((obj) => obj instanceof Ladder);
+    for (const ladder of ladders) {
+      if (physics.isColliding(ladder.getComponent(Physics))) {
+        //thanks Bob
+        //fix gamepad later
+        if (input.isKeyDown('ArrowUp')) {
+          physics.velocity.y = -this.speed;
+        } else if (input.isKeyDown('ArrowDown')) {
+          physics.velocity.y = this.speed;
+        } else {
+          physics.velocity.y = 0;
+        }
+      }
+    }
+
     this.handleGamepadInput(input);
     
     // Handle player movement
@@ -50,7 +66,7 @@ class Player extends GameObject {
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
     }
-
+    
     // Handle player jumping
     if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
       this.startJump();
