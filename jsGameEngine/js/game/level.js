@@ -21,7 +21,7 @@ class Level extends Game {
 
     // Create a player object and add it to the game
     //this.canvas.width / 2 - 25
-    const player = new Player(0, this.canvas.height / 2 - 25);
+    const player = new Player(this.canvas.width - 800, this.canvas.height / 2 - 25);
     this.addGameObject(player);
     
     // Add the player UI object to the game
@@ -57,7 +57,9 @@ class Level extends Game {
     this.addGameObject(new Platform(platformWidth + gap + 100, this.canvas.height - 400, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap + 100, this.canvas.height - 400, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap * 2 + 250, this.canvas.height - 400, platformWidth - 180, 20));
-    //this.addGameObject(new MovingPlatform(4 * (platformWidth + gap), this.canvas.height - 20, platformWidth, 20));
+    
+    // The Moving platforms
+    this.addGameObject(new MovingPlatform(4 * (platformWidth + gap) - 200, this.canvas.height - 500, platformWidth, 20));
 
     // Create enemies and add them to the game
     // Temporarily and maybe completely disabling enemies

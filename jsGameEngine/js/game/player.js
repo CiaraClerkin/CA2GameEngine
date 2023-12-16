@@ -6,6 +6,7 @@ import Input from '../engine/input.js';
 import { Images } from '../engine/resources.js';
 import Enemy from './enemy.js';
 import Platform from './platform.js';
+import MovingPlatform from './movingPlatform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import Ladder from './ladder.js';
@@ -41,6 +42,7 @@ class Player extends GameObject {
 
     // Climbing the ladder
     // Sees if player makes contact with ladder, then player can move up or down
+    // minor issue when jumping on top of ladder
     const ladders = this.game.gameObjects.filter((obj) => obj instanceof Ladder);
     for (const ladder of ladders) {
       if (physics.isColliding(ladder.getComponent(Physics))) {
@@ -48,9 +50,11 @@ class Player extends GameObject {
         //fix gamepad later
         if (input.isKeyDown('ArrowUp')) {
           physics.velocity.y = -this.speed;
-        } else if (input.isKeyDown('ArrowDown')) {
+        } 
+        else if (input.isKeyDown('ArrowDown')) {
           physics.velocity.y = this.speed;
-        } else {
+        }
+        else {
           //so the player doesn't fall
           physics.velocity.y = 0;
           physics.gravity.y = 0;
@@ -114,6 +118,38 @@ class Player extends GameObject {
           this.isOnPlatform = true;
         }
       }
+    }
+
+    // Some testing only to come to a solution that I thought about but didn't do for some reason
+    // Also this seems to not work in movingPlatform update for some reason
+    const movingPlatforms = this.game.gameObjects.filter((obj) => obj instanceof MovingPlatform);
+    for (const movingPlatform of movingPlatforms) {
+      const physics = movingPlatform.getComponent(Physics);
+      physics.gravity.y = 0;
+      if (movingPlatform.movingUp) {
+            // If it hasn't reached its movement limit, make it move right
+            if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+              physics.velocity.y = -100;
+              movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
+              console.log(movingPlatform.movementDistance);
+            } else {
+              console.log("Hello");
+              // If it reached the limit, make it move left
+              movingPlatform.movingUp = false;
+              movingPlatform.movementDistance = 0;
+            }
+        } 
+        else {
+            // If it hasn't reached its movement limit, make it move left
+            if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+                physics.velocity.y = 100;
+                movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
+            } else {
+                // If it reached the limit, make it move right
+                movingPlatform.movingUp = true;
+                movingPlatform.movementDistance = 0;
+            }
+        }
     }
   
     // Check if player has fallen off the bottom of the screen
