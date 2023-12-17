@@ -137,7 +137,12 @@ class Player extends GameObject {
             //console.log("Hello");
             // If it reached the limit, make it move left
             movingPlatform.movementDistance = 0;
-            movingPlatform.direction = "left";
+            if (movingPlatform.clockwise) {
+              movingPlatform.direction = "right";
+            }
+            else {
+              movingPlatform.direction = "left";
+            }
           }
       }
       else if (movingPlatform.direction == "left") {
@@ -146,12 +151,24 @@ class Player extends GameObject {
             console.log("HI");
             physics.velocity.y = 0;
             physics.velocity.x = -100;
+            //this.movingPlatformPhysics(-100);
+            /*if (this.physics.isColliding(movingPlatform.getComponent(Physics))) {
+              this.physics.velocity.x = -100;
+            }*/
             movingPlatform.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
           }
           else {
             movingPlatform.movementDistance = 0;
-            movingPlatform.direction = "down";
+            if (movingPlatform.clockwise) {
+              movingPlatform.direction = "up";
+            }
+            else {
+              movingPlatform.direction = "down";
+            }
           }
+        }
+        else {
+          movingPlatform.direction = "down";
         }    
       } 
       else if (movingPlatform.direction == "down") {
@@ -159,11 +176,19 @@ class Player extends GameObject {
           if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
               physics.velocity.x = 0;
               physics.velocity.y = 100;
+              /*if (this.physics.isColliding(physics)) {
+                this.physics.velocity.x = 100;
+              }*/
               movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
           } else {
               // If it reached the limit, make it move right
               movingPlatform.movementDistance = 0;
-              movingPlatform.direction = "right";
+              if (movingPlatform.clockwise) {
+                movingPlatform.direction = "left";
+              }
+              else {
+                movingPlatform.direction = "right";
+              }
           }
       }
       else if (movingPlatform.direction == "right") {
@@ -171,12 +196,21 @@ class Player extends GameObject {
           if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
             physics.velocity.y = 0;
             physics.velocity.x = 100;
+            //this.movingPlatformPhysics(100);
             movingPlatform.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
           }
           else {
             movingPlatform.movementDistance = 0;
-            movingPlatform.direction = "up";
+            if (movingPlatform.clockwise) {
+              movingPlatform.direction = "down";
+            }
+            else {
+              movingPlatform.direction = "up";    
+            }
           }
+        }
+        else {
+          movingPlatform.direction = "up";
         }
       }
     }
@@ -198,6 +232,17 @@ class Player extends GameObject {
     }
 
     super.update(deltaTime);
+  }
+
+  movingPlatformPhysics(velocity) {
+    const physics = this.getComponent(Physics);
+    const movingPlatforms = this.game.gameObjects.filter((obj) => obj instanceof MovingPlatform);
+    
+    for (const movingPlatform of movingPlatforms) {
+      if (physics.isColliding(movingPlatform.getComponent(Physics))) {
+        physics.velocity.x = velocity;
+      }
+    }
   }
 
   handleGamepadInput(input){

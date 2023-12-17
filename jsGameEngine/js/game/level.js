@@ -63,10 +63,11 @@ class Level extends Game {
     this.addGameObject(new Platform(platformWidth + gap + gap + 100, this.canvas.height - 400, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap * 2 + 250, this.canvas.height - 400, platformWidth - 180, 20));
     
-
     // The Moving platforms
     this.addGameObject(new MovingPlatform(4 * (platformWidth + gap) - 200, this.canvas.height - 500, platformWidth, 20, 500));
-    this.addGameObject(new MovingPlatform(platformWidth - gap, this.canvas.height - 400, platformWidth, 20, 300, "circular"));
+    //i am very confused
+    this.addGameObject(new MovingPlatform(platformWidth-gap, this.canvas.height - 400, platformWidth, 20, 300, "circular", "up"));
+    this.addGameObject(new MovingPlatform(platformWidth - gap +520, -100, platformWidth, 20, 300, "circular", "left", true));
 
     // Create enemies and add them to the game
     // Temporarily and maybe completely disabling enemies

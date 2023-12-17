@@ -6,7 +6,7 @@ import GameObject from '../engine/gameobject.js';
 
 class MovingPlatform extends Platform {
     //class MovingPlatform extends GameObject {
-    constructor(x, y, width, height, movementLimit, movementType, color = 'gray') {
+    constructor(x, y, width, height, movementLimit, movementType, direction, clockwise, color = 'gray') {
         super(x, y, width, height, color);
    
         //super(x, y);
@@ -25,7 +25,15 @@ class MovingPlatform extends Platform {
         //this.movingLeft = true;
 
         //changed to string for simplicity of movement
-        this.direction = "up";
+        //also inputted now
+        if (direction == null) {
+            this.direction = "up";
+        }
+        else {
+            this.direction = direction;
+        }
+
+        this.clockwise = clockwise;
     }
 
     /*update(deltaTime) {
