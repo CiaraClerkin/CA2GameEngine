@@ -23,7 +23,7 @@ class Player extends GameObject {
     // Initialize all the player specific properties
     this.direction = 1;
     this.lives = 3;
-    this.score = 5;
+    this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
     this.jumpForce = 350;
