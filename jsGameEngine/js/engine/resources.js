@@ -2,6 +2,7 @@
 const Images = {
   player: new Image(), // The Image instance for the player.
   enemy: new Image(), // The Image instance for the enemy.
+  egg: new Image()
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -16,6 +17,8 @@ Images.player.src = './resources/images/player/player.png'; // Update the image 
 
 // Set the source of the enemy image.
 Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path
+
+Images.egg.src = './resources/images/egg/egg.png';
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };

@@ -18,7 +18,7 @@ import Platform from './platform.js';
 class Enemy extends GameObject {
 
   // Define the constructor for this class, which takes two arguments for the x and y coordinates
-  constructor(x, y) {
+  constructor(x, y, movementLimit) {
     // Call the constructor of the superclass (GameObject) with the x and y coordinates
     super(x, y);
     
@@ -32,7 +32,7 @@ class Enemy extends GameObject {
     
     // Initialize variables related to enemy's movement
     this.movementDistance = 0;
-    this.movementLimit = 330;
+    this.movementLimit = movementLimit;
     this.movingRight = true;
   }
 

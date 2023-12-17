@@ -23,7 +23,7 @@ class Player extends GameObject {
     // Initialize all the player specific properties
     this.direction = 1;
     this.lives = 3;
-    this.score = 0;
+    this.score = 5;
     this.isOnPlatform = false;
     this.isJumping = false;
     this.jumpForce = 350;
@@ -33,6 +33,8 @@ class Player extends GameObject {
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
+    //for teleporting after collectibles, so player can move after teleport
+    this.allFirst = true;
   }
 
   // The update function runs every frame and contains game logic
@@ -226,9 +228,13 @@ class Player extends GameObject {
     }
 
     // Check if player has collected all collectibles
-    if (this.score >= 3) {
+    if (this.score >= 5 && this.allFirst) {
       console.log('You win!');
-      location.reload();
+      // teleport to win location instead
+      this.x = -20;
+      this.y = -1150;
+      this.allFirst = false;
+      //location.reload();
     }
 
     super.update(deltaTime);

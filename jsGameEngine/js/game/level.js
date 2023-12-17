@@ -7,6 +7,10 @@ import Platform from './platform.js';
 import MovingPlatform from './movingPlatform.js';
 import Collectible from './collectible.js';
 import Ladder from './ladder.js';
+import UI from '../engine/ui.js';
+import GameText from '../engine/gameText.js';
+import Picture from './picture.js';
+import {Images} from '../engine/resources.js';
 
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
@@ -16,17 +20,27 @@ class Level extends Game {
     // Call the constructor of the superclass (Game) with the canvas ID
     super(canvasId);
 
+    // Add the player UI object to the game
+    this.addGameObject(new PlayerUI(10, 10));
+
+    //end game text thanks bob
+    //this.addGameObject(new UI("You Win!", platformWidth - gap - 180, -500));
+    this.addGameObject(new GameText("You Win!", -40, -600, "50px Arial", "white"));
+
+    // after collecting all the collectibles
+    this.addGameObject(new GameText("You Collected all the Collectables!", -300, -1100, "50px Arial", "white"));
+
+    //easter egg
+    this.addGameObject(new Picture(1550, this.canvas.height - 1200, 100, 100, Images.egg));
+
     // Create a ladder and add it to the game
-    this.addGameObject(new Ladder(3 * (200 + 150), 0, this.canvas.height));
+    this.addGameObject(new Ladder(3 * (200 + 155), 0, this.canvas.height));
 
     // Create a player object and add it to the game
     //this.canvas.width / 2 - 25
     const player = new Player(this.canvas.width - 800, this.canvas.height / 2 - 25);
     this.addGameObject(player);
     
-    // Add the player UI object to the game
-    this.addGameObject(new PlayerUI(10, 10));
-
     // Set the game's camera target to the player
     this.camera.target = player;
 
@@ -64,21 +78,35 @@ class Level extends Game {
     this.addGameObject(new Platform(platformWidth + gap + gap * 2 + 250, this.canvas.height - 400, platformWidth - 180, 20));
     
     // The Moving platforms
+    // vertical
     this.addGameObject(new MovingPlatform(4 * (platformWidth + gap) - 200, this.canvas.height - 500, platformWidth, 20, 500));
-    //i am very confused
+    // the circular ones
     this.addGameObject(new MovingPlatform(platformWidth-gap, this.canvas.height - 400, platformWidth, 20, 300, "circular", "up"));
     this.addGameObject(new MovingPlatform(platformWidth - gap +520, -100, platformWidth, 20, 300, "circular", "left", true));
 
+    // secret platform
+    this.addGameObject(new Platform(4 * (platformWidth + gap), this.canvas.height - 1000, platformWidth + 180, 20));
+
+    // end platform
+    this.addGameObject(new Platform(platformWidth - gap - 180, -500, platformWidth + 180, 20));
+
+    // end collectibles platform
+    this.addGameObject(new Platform(platformWidth - gap - 180, -1000, platformWidth + 180, 20));
+    
+
     // Create enemies and add them to the game
     // Temporarily and maybe completely disabling enemies
-    this.addGameObject(new Enemy(platformWidth + gap, this.canvas.height - 150));
+    this.addGameObject(new Enemy(platformWidth + gap, this.canvas.height - 150, 330));
+    //this.addGameObject(new Enemy(4 * (platformWidth + gap) - 200, this.canvas.height - 600), 200);
     //this.addGameObject(new Enemy(platformWidth + gap + 50, this.canvas.height - 90));
     //this.addGameObject(new Enemy(2 * (platformWidth + gap) + 50, this.canvas.height - 90));
 
     // Create collectibles and add them to the game
-    this.addGameObject(new Collectible(platformWidth + gap + gap + 52, this.canvas.height + 60, 15, 15));
-    this.addGameObject(new Collectible(platformWidth + gap + gap + 52 - 15, this.canvas.height - 190, 20, 20));
-    //this.addGameObject(new Collectible(650, this.canvas.height - 100, 20, 20));
+    this.addGameObject(new Collectible(platformWidth + gap + gap + 52.5, this.canvas.height + 60, 15, 15));
+    this.addGameObject(new Collectible(platformWidth + gap + gap + 52 - 15, this.canvas.height - 190, 15, 15));
+    this.addGameObject(new Collectible(platformWidth + gap + 102.5, this.canvas.height - 440, 15, 15));
+    this.addGameObject(new Collectible(4 * (platformWidth + gap) + (platformWidth + 180) / 2, this.canvas.height - 1020, 15, 15));
+    this.addGameObject(new Collectible(platformWidth - gap, -520, 15, 15));
 
   }
   
