@@ -8,7 +8,7 @@ class Picture extends GameObject {
         this.width = width;
         this.height = height;
         this.image = image;
-        this.addComponent(new Renderer("purple", width, height, image));
+        this.addComponent(new Renderer("#31636e", width, height, image));
     }
 }
 

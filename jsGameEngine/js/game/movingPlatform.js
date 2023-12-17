@@ -6,7 +6,7 @@ import GameObject from '../engine/gameobject.js';
 
 class MovingPlatform extends Platform {
     //class MovingPlatform extends GameObject {
-    constructor(x, y, width, height, movementLimit, movementType, direction, clockwise, color = 'gray') {
+    constructor(x, y, width, height, movementLimit, movementType, direction, clockwise, color = '#c2c3c4') {
         super(x, y, width, height, color);
    
         //super(x, y);

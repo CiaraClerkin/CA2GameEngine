@@ -20,6 +20,9 @@ class Level extends Game {
     // Call the constructor of the superclass (Game) with the canvas ID
     super(canvasId);
 
+    // background
+    this.addGameObject(new Picture(-1500, -1500, this.canvas.width * 10, this.canvas.height * 10));
+
     // Add the player UI object to the game
     this.addGameObject(new PlayerUI(10, 10));
 

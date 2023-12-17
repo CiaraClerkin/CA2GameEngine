@@ -6,7 +6,7 @@ class Ladder extends GameObject {
     constructor(x, y, height) {
         super(x, y);
         this.width = 25;
-        this.addComponent(new Renderer('green', this.width, height));
+        this.addComponent(new Renderer('#438737', this.width, height));
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }));
         this.tag = 'ladder';
     }
