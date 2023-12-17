@@ -126,30 +126,59 @@ class Player extends GameObject {
     for (const movingPlatform of movingPlatforms) {
       const physics = movingPlatform.getComponent(Physics);
       physics.gravity.y = 0;
-      if (movingPlatform.movingUp) {
-            // If it hasn't reached its movement limit, make it move right
-            if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
-              physics.velocity.y = -100;
+      if (movingPlatform.direction == "up") {
+          // If it hasn't reached its movement limit, make it move right
+          if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+            physics.velocity.x = 0;
+            physics.velocity.y = -100;
+            movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
+            //console.log(movingPlatform.movementDistance);
+          } else {
+            //console.log("Hello");
+            // If it reached the limit, make it move left
+            movingPlatform.movementDistance = 0;
+            movingPlatform.direction = "left";
+          }
+      }
+      else if (movingPlatform.direction == "left") {
+        if (movingPlatform.movementType === "circular") {
+          if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+            console.log("HI");
+            physics.velocity.y = 0;
+            physics.velocity.x = -100;
+            movingPlatform.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
+          }
+          else {
+            movingPlatform.movementDistance = 0;
+            movingPlatform.direction = "down";
+          }
+        }    
+      } 
+      else if (movingPlatform.direction == "down") {
+          // If it hasn't reached its movement limit, make it move left
+          if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+              physics.velocity.x = 0;
+              physics.velocity.y = 100;
               movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
-              console.log(movingPlatform.movementDistance);
-            } else {
-              console.log("Hello");
-              // If it reached the limit, make it move left
-              movingPlatform.movingUp = false;
+          } else {
+              // If it reached the limit, make it move right
               movingPlatform.movementDistance = 0;
-            }
-        } 
-        else {
-            // If it hasn't reached its movement limit, make it move left
-            if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
-                physics.velocity.y = 100;
-                movingPlatform.movementDistance += Math.abs(physics.velocity.y) * deltaTime;
-            } else {
-                // If it reached the limit, make it move right
-                movingPlatform.movingUp = true;
-                movingPlatform.movementDistance = 0;
-            }
+              movingPlatform.direction = "right";
+          }
+      }
+      else if (movingPlatform.direction == "right") {
+        if (movingPlatform.movementType === "circular") {
+          if (movingPlatform.movementDistance < movingPlatform.movementLimit) {
+            physics.velocity.y = 0;
+            physics.velocity.x = 100;
+            movingPlatform.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
+          }
+          else {
+            movingPlatform.movementDistance = 0;
+            movingPlatform.direction = "up";
+          }
         }
+      }
     }
   
     // Check if player has fallen off the bottom of the screen

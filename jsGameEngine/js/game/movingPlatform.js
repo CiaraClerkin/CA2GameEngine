@@ -6,20 +6,26 @@ import GameObject from '../engine/gameobject.js';
 
 class MovingPlatform extends Platform {
     //class MovingPlatform extends GameObject {
-    constructor(x, y, width, height, color = 'gray') {
+    constructor(x, y, width, height, movementLimit, movementType, color = 'gray') {
         super(x, y, width, height, color);
    
         //super(x, y);
         //this.width = width;
         //this.height = height;
 
+        this.movementLimit = movementLimit;
+        this.movementType = movementType;
+
         this.addComponent(new Renderer(color, width, height));
 
         this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 }, {x: 0, y: 0}));
 
         this.movementDistance = 0;
-        this.movementLimit = 500;
-        this.movingUp = true;
+        //this.movingUp = true;
+        //this.movingLeft = true;
+
+        //changed to string for simplicity of movement
+        this.direction = "up";
     }
 
     /*update(deltaTime) {

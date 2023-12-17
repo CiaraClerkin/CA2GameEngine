@@ -47,19 +47,26 @@ class Level extends Game {
     }*/
 
     //a lot of experimentation to try and get platforms moving
+    //start
     this.addGameObject(new Platform(0, this.canvas.height - 20, platformWidth + 50, 20));
+    //platform with enemy
     this.addGameObject(new Platform(platformWidth + gap, this.canvas.height - 150, platformWidth + 180, 20));
+    //tinies
     this.addGameObject(new Platform(platformWidth + gap, this.canvas.height + 100, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap + 50, this.canvas.height + 100, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap * 2 + 75, this.canvas.height + 100, platformWidth - 180, 20));
+    //platform with ladder
     this.addGameObject(new Platform(3 * (platformWidth + gap) - 100, this.canvas.height - 20, platformWidth + 50, 20));
 
+    //tinies after ladder
     this.addGameObject(new Platform(platformWidth + gap + 100, this.canvas.height - 400, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap + 100, this.canvas.height - 400, platformWidth - 180, 20));
     this.addGameObject(new Platform(platformWidth + gap + gap * 2 + 250, this.canvas.height - 400, platformWidth - 180, 20));
     
+
     // The Moving platforms
-    this.addGameObject(new MovingPlatform(4 * (platformWidth + gap) - 200, this.canvas.height - 500, platformWidth, 20));
+    this.addGameObject(new MovingPlatform(4 * (platformWidth + gap) - 200, this.canvas.height - 500, platformWidth, 20, 500));
+    this.addGameObject(new MovingPlatform(platformWidth - gap, this.canvas.height - 400, platformWidth, 20, 300, "circular"));
 
     // Create enemies and add them to the game
     // Temporarily and maybe completely disabling enemies
